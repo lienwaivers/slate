@@ -1,0 +1,32 @@
+runtime: php55
+api_version: 1
+threadsafe: true
+
+handlers:
+# Public assets
+- url: /(.+)$
+  login: required
+  secure: optional
+  static_files: build/\1
+  upload: build/(.+)$
+  http_headers:
+    # Make sure to keep header in sync with X_RECRUITING environment variable above
+    X-Recruiting: Enjoy reading HTTP headers? We want to talk to you! jobs@lienwaivers.io
+- url: /$
+  login: required
+  secure: always
+  static_files: build/index.html
+  upload: build/index\.html$
+  http_headers:
+    # Make sure to keep header in sync with X_RECRUITING environment variable above
+    X-Recruiting: Enjoy reading HTTP headers? We want to talk to you! jobs@lienwaivers.io
+
+skip_files:
+# Default (https://cloud.google.com/appengine/docs/php/config/appconfig#PHP_app_yaml_Skipping_files)
+- ^(.*/)?#.*#$
+- ^(.*/)?.*~$
+- ^(.*/)?.*\.py[co]$
+- ^(.*/)?.*/RCS/.*$
+- ^(.*/)?\..*$
+# Custom
+- ^(?!build).*$

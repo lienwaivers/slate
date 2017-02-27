@@ -13,6 +13,8 @@ toc_footers:
 
 includes:
   - errors
+  - google-analytics
+  - heap-analytics
 
 search: true
 ---
